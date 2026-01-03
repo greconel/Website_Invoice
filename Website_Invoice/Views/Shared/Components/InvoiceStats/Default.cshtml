@@ -1,0 +1,13 @@
+﻿@model Website_Invoice.ViewComponents.InvoiceStats
+
+<div class="card mb-3">
+    <div class="card-header">
+        <h5>Invoice Statistics</h5>
+    </div>
+    <div class="card-body">
+        <p><strong>Total Invoices:</strong> @Model.TotalInvoices</p>
+        <p><strong>Total Amount:</strong> @Model.TotalAmount.ToString("C")</p>
+        <p><strong>Average Amount:</strong> @Model.AverageAmount.ToString("C")</p>
+    </div>
+</div>
+

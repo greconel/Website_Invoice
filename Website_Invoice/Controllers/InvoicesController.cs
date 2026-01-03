@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Website_Invoice.Models;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Website_Invoice.Controllers
 {
@@ -43,6 +44,7 @@ namespace Website_Invoice.Controllers
         }
 
         // GET: Invoices/Create
+        [Authorize]
         public async Task<IActionResult> Create()
         {
             var customers = await _customerRepository.GetListAsync();
@@ -53,6 +55,7 @@ namespace Website_Invoice.Controllers
         // POST: Invoices/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("InvoiceId,CustomerId,InvoiceDate,ProductTotal,SalesTax,Shipping,InvoiceTotal")] Invoice invoice)
         {
             if (ModelState.IsValid)
@@ -66,6 +69,7 @@ namespace Website_Invoice.Controllers
         }
 
         // GET: Invoices/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +90,7 @@ namespace Website_Invoice.Controllers
         // POST: Invoices/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("InvoiceId,CustomerId,InvoiceDate,ProductTotal,SalesTax,Shipping,InvoiceTotal,Timestamp")] Invoice invoice)
         {
             if (id != invoice.InvoiceId)
@@ -116,6 +121,7 @@ namespace Website_Invoice.Controllers
         }
 
         // GET: Invoices/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,6 +141,7 @@ namespace Website_Invoice.Controllers
         // POST: Invoices/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await _invoiceRepository.DeleteAsync(id);
